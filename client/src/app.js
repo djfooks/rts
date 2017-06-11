@@ -33,6 +33,15 @@ var App = function ()
     {
         document.getElementById("gameDrop").classList.remove("show");
     };
+
+    this.websocket = new WebSocket("ws://127.0.0.1:8080");
+    this.websocket.onopen = function open() {
+        that.websocket.send('something');
+    };
+
+    this.websocket.onmessage = function incoming(data) {
+        console.log(data);
+    };
 };
 
 App.prototype.mousedown = function mousedown(button, e)
