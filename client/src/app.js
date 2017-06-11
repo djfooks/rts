@@ -4,6 +4,7 @@ var App = function ()
     window.onerror = this.onError.bind(this);
     this.debugText = "";
 
+    this.frame = 0;
     this.fps = 30;
     this.intervalId = setInterval(this.update.bind(this), 1000 / this.fps);
 
@@ -49,10 +50,12 @@ App.prototype.mousemove = function mousemove(e)
 
 App.prototype.update = function update()
 {
-};
-
-App.prototype.updateGame = function updateGame()
-{
+    this.frame += 1;
+    var ctx = this.ctx;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.beginPath();
+    ctx.arc(95, 100 + Math.sin(this.frame / 10) * 50, 40, 0, 2 * Math.PI);
+    ctx.stroke();
 };
 
 App.prototype.debugInfo = function debugInfo(str)
